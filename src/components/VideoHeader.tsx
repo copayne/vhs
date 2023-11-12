@@ -1,11 +1,11 @@
 interface VideoHeader {
-  date: string,
+  // date: string,
   length: number,
   title: string,
 }
 
 const VideoHeader = ({
-    date,
+    // date,
     length,
     title,
  }: VideoHeader) => {
