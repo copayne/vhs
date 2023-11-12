@@ -7,7 +7,7 @@ interface Headshot {
 }
 
 const Headshot = ({ actor }: Headshot) => {
-  const headshot = useMemo(() => getHeadshot(actor), [actor]);
+  const headshot: Image = getHeadshot(actor);
 
   return !!headshot && (
     <div className="p-2 w-full flex flex-col items-center">

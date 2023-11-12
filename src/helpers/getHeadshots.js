@@ -32,4 +32,4 @@ export const getHeadshots = () => ({
     tim,
 });
 
-export const getHeadshot = (/** @type {string} */ actor) => getHeadshots()[actor];
+export const getHeadshot = (actor : string) => getHeadshots()[actor];
