@@ -60,7 +60,7 @@ interface Actor {
 
 export default function Home({ videos }: InferGetStaticPropsType<typeof getStaticProps>) {
   const video: Video = videos.length
-    ? videos.find(v => v.name === "Christmas '94")
+    ? videos.find((v: Video) => v.name === "Christmas '94")
     : null;
 
   return (
