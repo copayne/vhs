@@ -28,6 +28,7 @@ export const getStaticProps: GetStaticProps = async () => {
       category: true,
       featured: true,
       filmed: true,
+      // filmDate: true,
       id: true,
       length: true,
       name: true,
@@ -41,8 +42,27 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
+interface Video {
+  category: object,
+  featured: Array<Actor>
+  filmed: Array<Actor>
+  id: number,
+  length: number,
+  name: string,
+  src: string,
+}
+
+interface Actor {
+  name: string,
+  id: number,
+  headshot: string,
+};
 
 export default function Home({ videos }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const video: Video = videos.length
+    ? videos.find(v => v.name === "Christmas '94")
+    : null;
+
   return (
     <>
       <style jsx global>{`
@@ -59,18 +79,23 @@ export default function Home({ videos }: InferGetStaticPropsType<typeof getStati
       <NetworkBanner />
         <section className="flex min-h-screen flex-col w-full sm:w-1/2 sm:m-auto mt-8 sm:mt-8">
           <div className="sm:w-full sm:m-auto sm:mb-0 sm:mt-0">
-            <ReactPlayer
-              controls
-              height="100%"
-              url={buildSrc(videos[43].src)}
-              width="100%"
-            />
+            {
+              video && (
+                <ReactPlayer
+                  controls
+                  height="100%"
+                  url={buildSrc(video.src)}
+                  width="100%"
+                />
+              )
+            }
+
           </div>
-          <VideoHeader title={videos[43].name} length={videos[43].length} date={videos[43].filmDate} />
+          <VideoHeader title={video.name} length={video.length} />
           <p className="pl-1 text-sm">
             Featuring:
           </p>
-          <Featuring featuring={videos[43].featured.map(actor => actor.name.toLowerCase())} />
+          <Featuring featuring={video.featured.map((actor: Actor) => actor.name.toLowerCase())} />
         </section>
       </main>
     </>
