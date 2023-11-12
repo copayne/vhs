@@ -7,7 +7,7 @@ interface Headshot {
 }
 
 const Headshot = ({ actor }: Headshot) => {
-  const headshot: Image = getHeadshot(actor);
+  const headshot: typeof Image = getHeadshot(actor);
 
   return !!headshot && (
     <div className="p-2 w-full flex flex-col items-center">
