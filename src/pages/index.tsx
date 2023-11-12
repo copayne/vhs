@@ -20,7 +20,7 @@ const lato = Lato({
 
 const CLOUDFRONT_ADDRESS = 'https://dx19ntdwg65hl.cloudfront.net';
 
-const buildSrc = fileName => `${CLOUDFRONT_ADDRESS}/exports/${fileName}.mp4`;
+const buildSrc = (fileName : string) => `${CLOUDFRONT_ADDRESS}/exports/${fileName}.mp4`;
 
 export const getStaticProps: GetStaticProps = async () => {
   const videos = await prisma.video.findMany({
@@ -43,8 +43,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
 
 export default function Home({ videos }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log(videos, 'vid');
-
   return (
     <>
       <style jsx global>{`
