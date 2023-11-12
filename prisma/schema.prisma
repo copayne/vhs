@@ -6,21 +6,9 @@ generator client {
 }
 
 datasource db {
-    provider = "postgresql"
-    // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url      = env("DATABASE_URL")
-}
-
-model Example {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    @@index([name])
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model Person {
@@ -38,11 +26,15 @@ model Video {
     length Int
     featured Person[] @relation("featured")
     filmed Person[]
+    filmDate DateTime?  @db.Date
+    category Category @relation(fields: [categoryId], references: [id])
+    categoryId Int
 }
 
 model Category {
     id Int @id @default(autoincrement())
     name String @unique
+    video Video[]
 }
 
 // Necessary for Next auth
