@@ -13,23 +13,72 @@ import steve from '../../public/assets/headshots/steve.png';
 import linda from '../../public/assets/headshots/linda.png';
 import carol from '../../public/assets/headshots/carol.png';
 import alex from '../../public/assets/headshots/alex.png';
+import type { StaticImageData } from 'next/image';
 
-export const getHeadshots = () => ({
-    aaron,
-    alex,
-    carol,
-    cody,
-    june,
-    kevin,
-    linda,
-    margaret,
-    matthew,
-    michael,
-    rachel,
-    ruby,
-    steve,
-    terry,
-    tim,
-});
+export interface HeadshotData {
+  id: string,
+  src: StaticImageData,
+}
 
-export const getHeadshot = (/** @type {string} */ actor) => getHeadshots()[actor];
+export const HEADSHOTS: Array<HeadshotData> = [
+  {
+    id: 'aaron',
+    src: aaron,
+  },
+  {
+    id: 'alex',
+    src: alex,
+  },
+  {
+    id: 'carol',
+    src: carol,
+  },
+  {
+    id: 'cody',
+    src: cody,
+  },
+  {
+    id: 'june',
+    src: june,
+  },
+  {
+    id: 'kevin',
+    src: kevin,
+  },
+  {
+    id: 'linda',
+    src: linda,
+  },
+  {
+    id: 'margaret',
+    src: margaret,
+  },
+  {
+    id: 'matthew',
+    src: matthew,
+  },
+  {
+    id: 'michael',
+    src: michael,
+  },
+  {
+    id: 'rachel',
+    src: rachel,
+  },
+  {
+    id: 'ruby',
+    src: ruby,
+  },
+  {
+    id: 'steve',
+    src: steve,
+  },
+  {
+    id: 'terry',
+    src: terry,
+  },
+  {
+    id: 'tim',
+    src: tim,
+  },
+];

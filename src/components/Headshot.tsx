@@ -1,20 +1,19 @@
-import { useMemo } from 'react';
 import Image from 'next/image';
-import { getHeadshot } from '../helpers/getHeadshots';
+import { HEADSHOTS, type HeadshotData } from '../helpers/getHeadshots';
 
 interface Headshot {
   actor: string,
 }
 
 const Headshot = ({ actor }: Headshot) => {
-  const headshot: typeof Image = getHeadshot(actor);
+  const headshot: HeadshotData = HEADSHOTS[actor];
 
-  return !!headshot && (
+  return (
     <div className="p-2 w-full flex flex-col items-center">
       <div className="border-2 border-black w-[75px] h-[75px]">
         <Image
           alt={`${actor} headshot`}
-          src={headshot}
+          src={headshot.src}
           height="75"
           width="75"
         />
