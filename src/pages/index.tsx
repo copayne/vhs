@@ -78,7 +78,7 @@ export default function Home({ videos }: InferGetStaticPropsType<typeof getStati
       <main className="flex min-h-screen flex-col bg-light-background w-full">
       <NetworkBanner />
         <section className="flex min-h-screen flex-col w-full sm:w-1/2 sm:m-auto mt-8 sm:mt-8">
-          <div className="sm:w-full sm:m-auto sm:mb-0 sm:mt-0">
+          <div className="sm:w-full lg:w-3/5 sm:m-auto sm:mb-0 sm:mt-0">
             {
               video && (
                 <ReactPlayer

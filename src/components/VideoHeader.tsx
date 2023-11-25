@@ -15,7 +15,7 @@ const VideoHeader = ({
         <div className="min-w-fit text-2xl drop-shadow-lg">
           {title}
         </div>
-        <div className="flex flex-col min-w-fit items-end text-xs">
+        <div className="flex flex-col min-w-fit items-end drop-shadow-lg">
           <div>
             12/5/95
           </div>
