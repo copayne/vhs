@@ -6,8 +6,12 @@ interface DarkModeProps {
   size: string,
 }
 
+interface DarkModeState {
+  darkMode: boolean;
+}
+
 const DarkMode = ({ size = 'small' }: DarkModeProps) => {
-  const darkMode = useDarkMode((state: { darkMode: boolean; }) => state.darkMode);
+  const darkMode = useDarkMode<DarkModeState>((state) => state.darkMode);
   const update = useDarkMode(state => state.update);
 
   return (

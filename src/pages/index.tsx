@@ -59,8 +59,8 @@ interface Actor {
 };
 
 export default function Home({ videos }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const video: Video = videos.length
-    ? videos.find((v: Video) => v.name === "Christmas '94")
+  const video: Video | null = Array.isArray(videos) && videos.length
+    ? (videos.find((v: Video) => v.name === "Christmas '94") as Video)
     : null;
 
   return (
@@ -77,26 +77,30 @@ export default function Home({ videos }: InferGetStaticPropsType<typeof getStati
       </Head>
       <main className="flex min-h-screen flex-col bg-light-background w-full">
       <NetworkBanner />
-        <section className="flex min-h-screen flex-col w-full sm:w-1/2 sm:m-auto mt-8 sm:mt-8">
-          <div className="sm:w-full lg:w-3/5 sm:m-auto sm:mb-0 sm:mt-0">
-            {
-              video && (
-                <ReactPlayer
-                  controls
-                  height="100%"
-                  url={buildSrc(video.src)}
-                  width="100%"
-                />
-              )
-            }
+      {
+        !!video && (
+          <section className="flex min-h-screen flex-col w-full sm:w-1/2 sm:m-auto mt-8 sm:mt-8">
+            <div className="sm:w-full lg:w-3/5 sm:m-auto sm:mb-0 sm:mt-0">
+              {
+                video && (
+                  <ReactPlayer
+                    controls
+                    height="100%"
+                    url={buildSrc(video.src)}
+                    width="100%"
+                  />
+                )
+              }
 
-          </div>
-          <VideoHeader title={video.name} length={video.length} />
-          <p className="pl-1 text-sm">
-            Featuring:
-          </p>
-          <Featuring featuring={video.featured.map((actor: Actor) => actor.name.toLowerCase())} />
-        </section>
+            </div>
+            <VideoHeader title={video.name} length={video.length} />
+            <p className="pl-1 text-sm">
+              Featuring:
+            </p>
+            <Featuring featuring={video.featured.map((actor: Actor) => actor.name.toLowerCase())} />
+          </section>
+        )
+      }
       </main>
     </>
   );
