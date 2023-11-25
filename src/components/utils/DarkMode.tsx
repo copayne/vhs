@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { FaSun} from 'react-icons/fa';
 import { FaRegMoon } from 'react-icons/fa';
 import { useDarkMode } from "~/stores/DarkMode";
@@ -6,12 +10,8 @@ interface DarkModeProps {
   size: string,
 }
 
-interface DarkModeState {
-  darkMode: boolean;
-}
-
 const DarkMode = ({ size = 'small' }: DarkModeProps) => {
-  const darkMode = useDarkMode<DarkModeState>((state) => state.darkMode);
+  const darkMode = useDarkMode((state: { darkMode: boolean; }) => state.darkMode);
   const update = useDarkMode(state => state.update);
 
   return (
