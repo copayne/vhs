@@ -6,41 +6,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        'light': {
-          'primary': {
-            DEFAULT: '#4E6D47',
-            'dark': '#354A30',
-            'light': '#6A9461',
-          },
-          'secondary': {
-            DEFAULT: '#CF4E1A',
-            'dark': '#A33D14',
-            'light': '#E97749',
-          },
-          'tertiary': {
-            DEFAULT: '#2F2175',
-            'dark': '#201650',
-            'light': '#4631AF',
-          },
-          'background': '#EAECE1',
-        },
-        'dark': {
-          'primary': {
-            DEFAULT: '#C3FFE9',
-            'dark': '#85FFD2',
-            'light': '#EBFFF8',
-          },
-          'secondary': {
-            DEFAULT: '#FFD000',
-            'dark': '#CCA700',
-            'light': '#FFDD47',
-          },
-          'tertiary': {
-            DEFAULT: '#C94B60',
-            'dark': '#AD3448',
-            'light': '#D98190',
-          },
-          'background': '#232B36',
+        'default': {
+          'background': '#ABB5B8',
+          'black': '#202020',
+          'white': '#E0E0E0',
+          'purple': '#3C247A',
+          'pink': '#C8357B',
+          'red': '#F32228',
+          'orange': '#F87F16',
         },
       },
       boxShadow: {

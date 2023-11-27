@@ -22,7 +22,7 @@ const Headshot = ({ actor }: Headshot) => {
           )
         }
       </div>
-      <p className="capitalize underline underline-offset-4 text-dark-secondary text-sm text-center">
+      <p className="capitalize underline underline-offset-4 text-default-white text-sm text-center">
         {actor}
       </p>
     </div>

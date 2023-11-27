@@ -10,18 +10,10 @@ const VideoHeader = ({
     title,
  }: VideoHeader) => {
   return (
-    <div className="p-2 pl-1 flex w-full">
+    <div className="p-2 pl-1 flex w-full text-light-primary">
       <div className="flex justify-between w-full">
-        <div className="min-w-fit text-2xl drop-shadow-lg">
-          {title}
-        </div>
-        <div className="flex flex-col min-w-fit items-end drop-shadow-lg">
-          <div>
-            12/5/95
-          </div>
-          <div>
-            {Math.floor(length / 60)}:{length % 60}
-          </div>
+        <div className="min-w-fit text-3xl font-semibold drop-shadow-lg ml-auto">
+          {title.toLocaleUpperCase()}
         </div>
       </div>
     </div>
