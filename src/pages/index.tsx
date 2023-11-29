@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type {
   GetStaticProps,
   InferGetStaticPropsType,
@@ -6,7 +7,10 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import prisma from '../../lib/prisma';
 import Head from "next/head";
 import ReactPlayer from "react-player";
-import Featuring from '../components/Featuring';
+import Details from '~/components/Details';
+import Featuring from '~/components/Featuring';
+import FilmedBy from '~/components/FilmedBy';
+import Library from '~/components/Library';
 import NetworkBanner from '../components/NetworkBanner';
 import VideoHeader from '../components/VideoHeader';
 import { ColorStripeRainbow } from '~/components/common/ColorStripe';
@@ -43,7 +47,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-interface Video {
+export interface Video {
   category: object,
   featured: Array<Actor>
   filmed: Array<Actor>
@@ -63,6 +67,7 @@ export default function Home({ videos }: InferGetStaticPropsType<typeof getStati
   const video: Video | null = Array.isArray(videos) && videos.length
     ? (videos.find((v: Video) => v.name === "Christmas '94") as Video)
     : null;
+  console.log(video);
 
   return (
     <>
@@ -80,7 +85,7 @@ export default function Home({ videos }: InferGetStaticPropsType<typeof getStati
       <NetworkBanner />
       {
         !!video && (
-          <section className="flex min-h-screen flex-col w-full sm:w-1/2 sm:m-auto mt-0 sm:mt-8">
+          <section className="flex min-h-screen flex-col w-full sm:max-w-screen-md sm:m-auto mt-0 sm:mt-8">
             <div className="sm:w-full lg:w-3/5 sm:m-auto sm:mb-0 sm:mt-0">
               {
                 video && (
@@ -96,7 +101,10 @@ export default function Home({ videos }: InferGetStaticPropsType<typeof getStati
             </div>
             <ColorStripeRainbow />
             <VideoHeader title={video.name} length={video.length} />
-            <Featuring featuring={video.featured.map((actor: Actor) => actor.name.toLowerCase())} />
+            <Featuring featuring={video.featured.map((actor: Actor) => actor.name)} />
+            <FilmedBy filmedBy={video.filmed.map((actor: Actor) => actor.name)} />
+            <Details category={video.category.name} length={video.length} />
+            <Library videos={videos} />
           </section>
         )
       }
