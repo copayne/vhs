@@ -1,12 +1,12 @@
 import Image from 'next/image';
-import { HEADSHOTS } from '../helpers/getHeadshots';
+import { HEADSHOTS } from '../../helpers/getHeadshots';
 
 interface Headshot {
   actor: string,
 }
 
 const Headshot = ({ actor }: Headshot) => {
-  const headshot = HEADSHOTS.find(h => h.id === actor);
+  const headshot = HEADSHOTS.find(h => h.id === actor.toLocaleLowerCase());
 
   return (
     <div className="p-2 w-full flex flex-col items-center">
@@ -22,8 +22,8 @@ const Headshot = ({ actor }: Headshot) => {
           )
         }
       </div>
-      <p className="capitalize underline underline-offset-4 text-default-white text-sm text-center">
-        {actor}
+      <p className="underline underline-offset-4 text-default-white text-xs text-center mt-1">
+        {actor.toLocaleUpperCase()}
       </p>
     </div>
   );
