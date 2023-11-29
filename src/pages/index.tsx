@@ -48,13 +48,18 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 export interface Video {
-  category: object,
+  category: Category,
   featured: Array<Actor>
   filmed: Array<Actor>
   id: number,
   length: number,
   name: string,
   src: string,
+}
+
+interface Category {
+  id: number,
+  name: string,
 }
 
 interface Actor {
@@ -67,7 +72,6 @@ export default function Home({ videos }: InferGetStaticPropsType<typeof getStati
   const video: Video | null = Array.isArray(videos) && videos.length
     ? (videos.find((v: Video) => v.name === "Christmas '94") as Video)
     : null;
-  console.log(video);
 
   return (
     <>
