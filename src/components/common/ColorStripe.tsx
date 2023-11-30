@@ -7,7 +7,7 @@ interface ColorStripe {
 
 const ColorStripe = ({ text = '', color }: ColorStripe) => (
   <div className={clsx(
-    'w-full text-lg text-default-white font-semibold h-full',
+    'w-full text-lg text-white font-semibold h-full',
     color === 'purple' && 'bg-default-purple',
     color === 'pink' && 'bg-default-pink',
     color === 'red' && 'bg-default-red',
