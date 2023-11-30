@@ -19,11 +19,12 @@ const Library = ({ videos }: Library) => {
   return (
     <>
       <div className="w-full">
-        <ColorStripe text="Library" color="orange" />
+        <ColorStripe text="Library" color="pink" />
       </div>
-      <div className="m-1 sm:m-0 p-2 bg-default-black w-[98%] sm:w-full flex flex-wrap border-2 border-black text-default-white flex-col">
-        <div className="w-full bg-white rounded-md text-sm text-default-black">
-          <div className="m-2 flex text-xs font-semibold">
+      <div className="m-1 sm:m-0 p-1 w-[98%] sm:w-full flex flex-wrap text-default-white flex-col">
+        <div className="w-full bg-white rounded-md text-sm text-default-black drop-shadow-sticker">
+          <div className="w-full h-[6px] bg-black" />
+          <div className="m-2 flex text-xs font-semibold border-b-default-black border-dotted border-b-2">
             <div className="w-4/5">
               TITLE
             </div>

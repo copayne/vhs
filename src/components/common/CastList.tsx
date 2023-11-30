@@ -6,7 +6,7 @@ interface CastList {
 }
 
 const CastList = ({ cast }: CastList) => (
-  <div className="m-1 sm:m-0 p-2 bg-default-black w-[98%] sm:w-full flex flex-wrap border-2 border-black">
+  <div className="m-1 sm:m-0 p-2w-[98%] sm:w-full flex flex-wrap">
     { cast.map((actor) => (
         <div key={actor} className="w-1/4">
           <Headshot actor={actor} />

@@ -16,9 +16,12 @@ export default {
           'orange': '#F87F16',
         },
       },
-      boxShadow: {
-        'hard': '-10px -10px',
-      },
+      dropShadow: {
+        'sticker': [
+          '1px 0 1px rgba(0, 0, 0, .25)',
+          '-1px 0 1px rgba(0, 0, 0, .25)',
+        ],
+      }
     },
   },
   plugins: [],

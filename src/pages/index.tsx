@@ -7,9 +7,8 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import prisma from '../../lib/prisma';
 import Head from "next/head";
 import ReactPlayer from "react-player";
-import Details from '~/components/Details';
 import Featuring from '~/components/Featuring';
-import FilmedBy from '~/components/FilmedBy';
+import Footer from '~/components/Footer';
 import Library from '~/components/Library';
 import NetworkBanner from '../components/NetworkBanner';
 import VideoHeader from '../components/VideoHeader';
@@ -70,7 +69,7 @@ interface Actor {
 
 export default function Home({ videos }: InferGetStaticPropsType<typeof getStaticProps>) {
   const video: Video | null = Array.isArray(videos) && videos.length
-    ? (videos.find((v: Video) => v.name === "Christmas '94") as Video)
+    ? (videos.find((v: Video) => v.name === "Bike Lessons") as Video)
     : null;
 
   return (
@@ -94,6 +93,13 @@ export default function Home({ videos }: InferGetStaticPropsType<typeof getStati
               {
                 video && (
                   <ReactPlayer
+                    config={{
+                      file: {
+                        attributes: {
+                          playsInline: true,
+                        },
+                      },
+                    }}
                     controls
                     height="100%"
                     url={buildSrc(video.src)}
@@ -104,11 +110,15 @@ export default function Home({ videos }: InferGetStaticPropsType<typeof getStati
 
             </div>
             <ColorStripeRainbow />
-            <VideoHeader title={video.name} length={video.length} />
+            <VideoHeader
+              category={video.category.name}
+              filmedBy={video.filmed.map((actor: Actor) => actor.name)}
+              title={video.name}
+            />
             <Featuring featuring={video.featured.map((actor: Actor) => actor.name)} />
-            <FilmedBy filmedBy={video.filmed.map((actor: Actor) => actor.name)} />
-            <Details category={video.category.name} length={video.length} />
             <Library videos={videos} />
+            <ColorStripeRainbow />
+            <Footer />
           </section>
         )
       }

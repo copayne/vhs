@@ -22,8 +22,8 @@ const Headshot = ({ actor }: Headshot) => {
           )
         }
       </div>
-      <p className="underline underline-offset-4 text-default-white text-xs text-center mt-1">
-        {actor.toLocaleUpperCase()}
+      <p className="underline underline-offset-4 text-default-black text-xs text-center mt-1">
+        {actor}
       </p>
     </div>
   );
