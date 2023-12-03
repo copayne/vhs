@@ -1,14 +1,14 @@
-interface VideoHeader {
+interface VideoDetails {
   category: string,
   filmedBy: Array<string>
   title: string,
 }
 
-const VideoHeader = ({
+const VideoDetails = ({
     category,
     filmedBy,
     title,
- }: VideoHeader) => {
+ }: VideoDetails) => {
   const dirs = filmedBy.join(', ');
 
   return (
@@ -19,13 +19,15 @@ const VideoHeader = ({
           {title}
         </div>
         <div className="flex text-xs italic font-light justif p-1 pr-2 justify-between">
-          <span title={dirs} className="overflow-hidden text-ellipsis whitespace-nowrap">Filmed By: {dirs}</span>
-          <span>Tagged: <u>{category}</u></span>
-          <span>12/25/92</span>
+          <span title={dirs} className="ml-1 overflow-hidden text-ellipsis whitespace-nowrap">Filmed By: {dirs}</span>
+          <div>
+            <span className="mr-2">Tagged: <u>{category}</u></span>
+            <span className="ml-2">12/25/92</span>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default VideoHeader;
+export default VideoDetails;
