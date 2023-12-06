@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import dayjs from 'dayjs';
 import { useSelectedVideo } from "~/stores/SelectedVideo";
 import ColorStripe from './common/ColorStripe';
 import vhsLogo from '../../public/assets/VHS_C_Logo.png';
@@ -11,6 +12,12 @@ interface Library {
 const Library = ({ videos }: Library) => {
   const update = useSelectedVideo(state => state.update);
 
+  const selectVideo = (video: Video) => {
+    update(video);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   return (
     <>
       <div className="w-full">
@@ -19,7 +26,7 @@ const Library = ({ videos }: Library) => {
       <div className="m-1 sm:m-0 p-1 w-[98%] sm:w-full flex flex-wrap flex-col">
         <div className="w-full bg-white rounded-md text-sm drop-shadow-sticker">
           <div className="w-full h-[6px] bg-black" />
-          <div className="m-2 flex text-xs font-semibold border-b-default-black border-dotted border-b-2 text-default-black">
+          <div className="m-2 mb-1 flex text-xs font-semibold border-b-default-black border-dotted border-b-2 text-default-black">
             <div className="w-4/5">
               TITLE
             </div>
@@ -31,15 +38,21 @@ const Library = ({ videos }: Library) => {
             videos.map(video => (
               <div
                 key={video.id}
-                className="m-2 mt-3 mb-3 flex border-b-default-black border-dotted border-b-2 bg-white odd:bg-gray-300"
+                className="p-2 pb-1 flex border-b-default-black border-dotted border-b-2 bg-white even:bg-gray-300"
               >
                 <div className="w-4/5">
-                  <button onClick={() => update(video)}>
+                  <button onClick={() => selectVideo(video)}>
                     {video.name}
                   </button>
                 </div>
                 <div className="w-1/5">
-                  <span>12/25/92</span>
+                  <span>
+                    {video.filmDate
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+                      ? dayjs(video.filmDate).format("MM/DD/YYYY")
+                      : ''
+                    }
+                  </span>
                 </div>
               </div>
             ))
