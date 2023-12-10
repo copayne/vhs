@@ -18,13 +18,6 @@ const VideoPlayer = () => {
             <div className="w-full lg:w-1/2 h-full bg-black">
               <ReactPlayer
                 playsinline
-                // config={{
-                //   file: {
-                //     attributes: {
-                //       playsInline: true,
-                //     },
-                //   },
-                // }}
                 controls
                 height="100%"
                 url={buildSrc(selectedVideo.src)}
