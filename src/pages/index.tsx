@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps = async () => {
       src: true,
     },
   });
-  const formattedVideos = videos.map((v: Video) => ({
+  const formattedVideos = videos.map((v: { filmDate: { toString: () => any; }; }) => ({
     ...v,
     filmDate: v.filmDate
       ? v.filmDate.toString()
