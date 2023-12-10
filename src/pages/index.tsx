@@ -35,15 +35,8 @@ export const getStaticProps: GetStaticProps = async () => {
       name: true,
       src: true,
     },
-    where: {
-      featured: {
-        some: {
-          name: 'Cody',
-        }
-      }
-    }
   });
-  const formattedVideos = videos.map(v => ({
+  const formattedVideos = videos.map((v: Video) => ({
     ...v,
     filmDate: v.filmDate
       ? v.filmDate.toISOString()
@@ -60,7 +53,7 @@ export interface Video {
   category: Category,
   featured: Array<Actor>
   filmed: Array<Actor>
-  filmDate: string,
+  filmDate: Date,
   id: number,
   length: number,
   name: string,

@@ -16,7 +16,7 @@ interface Library {
 
 interface LibraryEntry {
   video: Video
-  selectVideo: Function
+  selectVideo: (video: Video) => void
 }
 
 const LibraryEntry = ({ selectVideo, video }: LibraryEntry) => (
@@ -68,11 +68,11 @@ const Library = ({ videos }: Library) => {
               DATE
             </div>
           </div>
-          { videos.slice(0, 19).map(video => <LibraryEntry selectVideo={selectVideo} video={video} />) }
+          { videos.slice(0, 19).map(video => <LibraryEntry key={video.id} selectVideo={selectVideo} video={video} />) }
           {
             showExpand && (
               <Collapse in={expanded}>
-                { videos.slice(19).map(video => <LibraryEntry selectVideo={selectVideo} video={video} />) }
+                { videos.slice(19).map(video => <LibraryEntry key={video.id} selectVideo={selectVideo} video={video} />) }
               </Collapse>
             )
           }
