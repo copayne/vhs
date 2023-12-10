@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const formattedVideos = videos.map((v: Video) => ({
     ...v,
     filmDate: v.filmDate
-      ? v.filmDate.toISOString()
+      ? v.filmDate.toString()
       : '',
   }));
 
@@ -53,7 +53,7 @@ export interface Video {
   category: Category,
   featured: Array<Actor>
   filmed: Array<Actor>
-  filmDate: Date,
+  filmDate: string,
   id: number,
   length: number,
   name: string,
