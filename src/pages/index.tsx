@@ -23,6 +23,7 @@ const interFont = Inter({
 });
 
 export const getStaticProps: GetStaticProps = async () => {
+  // TODO: add sorting options
   const videos = await prisma.video.findMany({
     select: {
       category: true,
@@ -33,12 +34,12 @@ export const getStaticProps: GetStaticProps = async () => {
       length: true,
       name: true,
       src: true,
-    }
+    },
   });
   const formattedVideos = videos.map(v => ({
     ...v,
     filmDate: v.filmDate
-      ? v.filmDate.toISOString()
+      ? v.filmDate.toString()
       : '',
   }));
 

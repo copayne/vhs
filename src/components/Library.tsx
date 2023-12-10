@@ -1,5 +1,10 @@
+import { useState } from 'react';
 import Image from 'next/image';
 import dayjs from 'dayjs';
+import Collapse from '@mui/material/Collapse';
+import Button from '@mui/material/Button';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useSelectedVideo } from "~/stores/SelectedVideo";
 import ColorStripe from './common/ColorStripe';
 import vhsLogo from '../../public/assets/VHS_C_Logo.png';
@@ -9,8 +14,37 @@ interface Library {
   videos: Array<Video>
 }
 
+interface LibraryEntry {
+  video: Video
+  selectVideo: (video: Video) => void
+}
+
+const LibraryEntry = ({ selectVideo, video }: LibraryEntry) => (
+  <div
+  key={video.id}
+  className="p-2 pb-1 flex border-b-default-black border-dotted border-b-2 bg-white even:bg-gray-300"
+>
+  <div className="w-4/5">
+    <button onClick={() => selectVideo(video)}>
+      {video.name}
+    </button>
+  </div>
+  <div className="w-1/5">
+    <span>
+      {video.filmDate
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+        ? dayjs(video.filmDate).format("MM/DD/YYYY")
+        : ''
+      }
+    </span>
+  </div>
+</div>
+)
+
 const Library = ({ videos }: Library) => {
+  const [expanded, setExpanded] = useState(false);
   const update = useSelectedVideo(state => state.update);
+  const showExpand = videos.length > 20;
 
   const selectVideo = (video: Video) => {
     update(video);
@@ -34,28 +68,30 @@ const Library = ({ videos }: Library) => {
               DATE
             </div>
           </div>
+          { videos.slice(0, 19).map(video => <LibraryEntry key={video.id} selectVideo={selectVideo} video={video} />) }
           {
-            videos.map(video => (
-              <div
-                key={video.id}
-                className="p-2 pb-1 flex border-b-default-black border-dotted border-b-2 bg-white even:bg-gray-300"
-              >
-                <div className="w-4/5">
-                  <button onClick={() => selectVideo(video)}>
-                    {video.name}
-                  </button>
-                </div>
-                <div className="w-1/5">
-                  <span>
-                    {video.filmDate
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-                      ? dayjs(video.filmDate).format("MM/DD/YYYY")
-                      : ''
-                    }
-                  </span>
-                </div>
+            showExpand && (
+              <Collapse in={expanded}>
+                { videos.slice(19).map(video => <LibraryEntry key={video.id} selectVideo={selectVideo} video={video} />) }
+              </Collapse>
+            )
+          }
+          {
+            showExpand && (
+              <div className="flex w-full justify-center">
+                <Button
+                  className="capitalize"
+                  color="inherit"
+                  onClick={() => setExpanded(prev => !prev)}
+                  startIcon={expanded
+                    ? <ExpandLessIcon />
+                    : <ExpandMoreIcon />
+                  }
+                >
+                  { expanded ? 'Collapse' : 'Expand' }
+                </Button>
               </div>
-            ))
+            )
           }
           <div>
             <div className="m-2 mt-4 flex flex-nowrap">
