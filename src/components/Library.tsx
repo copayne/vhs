@@ -12,7 +12,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useSelectedVideo } from "~/stores/SelectedVideo";
-import { Criteria, useVideos } from "~/stores/Videos";
+import { type Criteria, useVideos } from "~/stores/Videos";
 import ColorStripe from './common/ColorStripe';
 import vhsLogo from '../../public/assets/VHS_C_Logo.png';
 import type { Video } from '~/pages';
