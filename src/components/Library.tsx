@@ -66,7 +66,7 @@ const Library = () => {
   const setVideos = useVideos(state => state.setVideos);
   const videos = useVideos(state => state.videos);
 
-  const fetchVideos = async (newCriteria: Criteria) => {
+  const fetchVideos = async (newCriteria: Criteria = criteria) => {
     try {
       setLoading(true);
 
@@ -94,12 +94,13 @@ const Library = () => {
       },
     };
 
-    fetchVideos(newCriteria);
+    setCriteria(newCriteria);
   }
 
   useEffect(() => {
-    fetchVideos(criteria);
-  });
+    fetchVideos();
+    // eslint-disable-next-line
+  }, []);
 
   const selectVideo = (video: Video) => {
     update(video);
