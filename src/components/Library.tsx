@@ -66,7 +66,9 @@ const Library = () => {
   const fetchVideos = async (newCriteria: Criteria) => {
     try {
       setLoading(true);
+
       const newVideos = await fetcher(`/api/videos?criteria=${JSON.stringify(newCriteria)}`);
+  
       setVideos(newVideos);
       setCriteria(newCriteria);
       setShowExpand(!!newVideos && newVideos?.length > 20);
@@ -90,11 +92,10 @@ const Library = () => {
     };
 
     fetchVideos(newCriteria);
-    setCriteria(newCriteria);
   }
 
   useEffect(() => {
-    sortVideos();
+    fetchVideos(criteria);
   }, [])
 
   const selectVideo = (video: Video) => {
