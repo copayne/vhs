@@ -12,7 +12,6 @@ import Library from '~/components/Library';
 import NetworkBanner from '../components/NetworkBanner';
 import VideoDetails from '~/components/VideoDetails';
 import VideoPlayer from '~/components/VideoPlayer';
-
 import { api } from "~/utils/api";
 import { Inter } from 'next/font/google';
 
@@ -92,7 +91,7 @@ export default function Home({ videos }: InferGetStaticPropsType<typeof getStati
         <section className="min-h-screen w-full sm:max-w-screen-md sm:m-auto mt-0">
           <VideoDetails />
           <Featuring />
-          <Library videos={videos} />
+          <Library />
         </section>
         <Footer />
       </main>
