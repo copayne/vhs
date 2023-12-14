@@ -94,13 +94,13 @@ const Library = () => {
       },
     };
 
-    setCriteria(newCriteria);
+    fetchVideos(newCriteria);
   }
 
   useEffect(() => {
     fetchVideos();
     // eslint-disable-next-line
-  }, [criteria]);
+  }, []);
 
   const selectVideo = (video: Video) => {
     update(video);
