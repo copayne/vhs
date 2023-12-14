@@ -1,10 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import type {
-  GetStaticProps,
-  InferGetStaticPropsType,
-} from 'next';
 import { signIn, signOut, useSession } from "next-auth/react";
-import prisma from '../../lib/prisma';
 import Head from "next/head";
 import Featuring from '~/components/Featuring';
 import Footer from '~/components/Footer';
@@ -20,33 +15,6 @@ const interFont = Inter({
   style: 'normal',
   subsets: ['latin'],
 });
-
-export const getStaticProps: GetStaticProps = async () => {
-  // TODO: add sorting options
-  const videos = await prisma.video.findMany({
-    select: {
-      category: true,
-      featured: true,
-      filmed: true,
-      filmDate: true,
-      id: true,
-      length: true,
-      name: true,
-      src: true,
-    },
-  });
-  const formattedVideos = videos.map(v => ({
-    ...v,
-    filmDate: v.filmDate
-      ? v.filmDate.toString()
-      : '',
-  }));
-
-  return {
-    props: { videos: formattedVideos },
-    revalidate: 10,
-  };
-};
 
 export interface Video {
   category: Category,
@@ -70,7 +38,7 @@ export interface Actor {
   headshot: string,
 };
 
-export default function Home({ videos }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home() {
   return (
     <>
       <style jsx global>{`

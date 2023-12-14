@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import {
   useEffect,
@@ -98,7 +99,7 @@ const Library = () => {
 
   useEffect(() => {
     fetchVideos(criteria);
-  }, [])
+  });
 
   const selectVideo = (video: Video) => {
     update(video);
