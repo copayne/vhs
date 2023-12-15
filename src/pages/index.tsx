@@ -1,4 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import type {
+  GetStaticProps,
+  InferGetStaticPropsType,
+} from 'next';
+import prisma from '../../lib/prisma';
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Featuring from '~/components/Featuring';
@@ -16,6 +21,20 @@ const interFont = Inter({
   subsets: ['latin'],
 });
 
+export const getStaticProps: GetStaticProps = async () => {
+  const categories = await prisma.category.findMany({
+    select: {
+      id: true,
+      name: true,
+    }
+  });
+
+  return {
+    props: { categories },
+    revalidate: 10,
+  };
+};
+
 export interface Video {
   category: Category,
   featured: Array<Actor>
@@ -27,7 +46,7 @@ export interface Video {
   src: string,
 }
 
-interface Category {
+export interface Category {
   id: number,
   name: string,
 }
@@ -38,7 +57,7 @@ export interface Actor {
   headshot: string,
 };
 
-export default function Home() {
+export default function Home({ categories }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <style jsx global>{`
@@ -57,9 +76,9 @@ export default function Home() {
           <VideoPlayer />
         </section>
         <section className="min-h-screen w-full sm:max-w-screen-md sm:m-auto mt-0">
-          <VideoDetails />
+          <VideoDetails categories={categories} />
           <Featuring />
-          <Library />
+          <Library categories={categories} />
         </section>
         <Footer />
       </main>

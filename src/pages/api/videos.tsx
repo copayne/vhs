@@ -5,12 +5,36 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+const buildCriteriaConditions = (featured: Array<string>, category: number) => {
+  const hasFeatured = !!featured.length;
+  const hasCategory = !!category;
+  const hasCriteria = hasFeatured || hasCategory;
+  let catCrit = {};
+  let featCrit = [];
+  const conditions = [];
+
+  if (hasCategory) {
+    catCrit = { categoryId: { equals: category } };
+
+    conditions.push(catCrit);
+  }
+
+  if (hasFeatured) {
+    featured.forEach((cast: string) => {
+      conditions.push({ featured: { some: { name: cast } } })
+    });
+  }
+
+  return hasCriteria ? { AND: conditions } : {};
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
     const criteria = req?.query?.criteria && JSON.parse(req.query.criteria as string);
+    const conditions = buildCriteriaConditions(criteria.featured, criteria.category);
 
     const videos = await prisma.video.findMany({
       select: {
@@ -26,6 +50,7 @@ export default async function handler(
       orderBy: {
         [criteria?.orderBy.field || 'filmDate']: criteria?.orderBy?.sort || 'asc',
       },
+      where: { ...conditions },
     });
 
     res.status(200).json(videos);

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { HEADSHOTS } from '../../helpers/getHeadshots';
+import { useVideos } from '~/stores/Videos';
 
 interface Headshot {
   actor: string,
@@ -7,10 +8,27 @@ interface Headshot {
 
 const Headshot = ({ actor }: Headshot) => {
   const headshot = HEADSHOTS.find(h => h.id === actor.toLocaleLowerCase());
+  const criteria = useVideos(state => state.criteria);
+  const setFeatured = useVideos(state => state.setFeatured);
+
+  const handleFilterByActor = () => {
+    const newFeatured = criteria.featured;
+    const index = newFeatured.findIndex(n => n === actor);
+
+    if (index !== -1) {
+      newFeatured.splice(index, 1);
+    } else {
+      newFeatured.push(actor);
+    }
+
+    setFeatured(newFeatured);
+  }
 
   return (
     <div className="p-2 w-full flex flex-col items-center">
-      <div className="border-2 border-black w-[75px] h-[75px]">
+      <div
+        className="border-2 border-black w-[75px] h-[75px] cursor-pointer"
+        onClick={handleFilterByActor}>
         {
           headshot && (
             <Image

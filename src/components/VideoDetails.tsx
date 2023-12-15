@@ -1,9 +1,30 @@
+import dayjs from 'dayjs';
 import { useSelectedVideo } from "../stores/SelectedVideo";
-import { type Actor } from "~/pages/index";
+import { type Actor, type Category } from "~/pages/index";
+import { useVideos } from '~/stores/Videos';
 
-const VideoDetails = () => {
+interface VideoDetails {
+  categories: Array<Category>
+}
+
+const VideoDetails = ({ categories }: VideoDetails) => {
+  const criteria = useVideos(state => state.criteria);
   const selectedVideo  = useSelectedVideo(state => state.selectedVideo);
+  const setCriteria = useVideos(state => state.setCriteria);
   const dirs = selectedVideo?.filmed.map((actor: Actor) => actor.name).join(', ');
+
+  const handleClick = (name: string) => {
+    const cat = categories.find((c: Category) => c.name === name);
+
+    if (cat) {
+      const newCriteria = {
+        ...criteria,
+        category: cat.id,
+      }
+
+      setCriteria(newCriteria);
+    }
+  }
 
   return selectedVideo && (
     <div className="p-2 pl-1 flex w-full text-light-primary">
@@ -15,8 +36,19 @@ const VideoDetails = () => {
         <div className="flex text-xs italic font-light justif p-1 pr-2 justify-between">
           <span title={dirs} className="ml-1 overflow-hidden text-ellipsis whitespace-nowrap">Filmed By: {dirs}</span>
           <div>
-            <span className="mr-2">Tagged: <u>{selectedVideo?.category.name}</u></span>
-            <span className="ml-2">12/25/92</span>
+            <span className="mr-2">Tagged:
+              <span onClick={() => handleClick(selectedVideo?.category.name)}>
+                <u>{selectedVideo?.category.name}</u>
+              </span>
+            </span>
+            <span className="ml-2">
+              {
+                selectedVideo?.filmDate
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+                  ? dayjs(selectedVideo?.filmDate).format("MM/DD/YYYY")
+                  : ''
+              }
+            </span>
           </div>
         </div>
       </div>
