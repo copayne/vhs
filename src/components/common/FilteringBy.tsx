@@ -37,8 +37,6 @@ const FilteringBy = ({ categories }: FilteringBy) => {
     });
   }
 
-  console.log(criteria);
-
   return (
   <div className="flex flex-wrap">
     {
