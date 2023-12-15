@@ -37,7 +37,10 @@ const VideoDetails = ({ categories }: VideoDetails) => {
           <span title={dirs} className="ml-1 overflow-hidden text-ellipsis whitespace-nowrap">Filmed By: {dirs}</span>
           <div>
             <span className="mr-2">Tagged:
-              <span onClick={() => handleClick(selectedVideo?.category.name)}>
+              <span
+                className="cursor-pointer"
+                onClick={() => handleClick(selectedVideo?.category.name)}
+              >
                 <u>{selectedVideo?.category.name}</u>
               </span>
             </span>

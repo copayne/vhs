@@ -8,15 +8,10 @@ const prisma = new PrismaClient();
 const buildCriteriaConditions = (featured: Array<string>, category: number) => {
   const hasFeatured = !!featured.length;
   const hasCategory = !!category;
-  const hasCriteria = hasFeatured || hasCategory;
-  let catCrit = {};
-  let featCrit = [];
   const conditions = [];
 
   if (hasCategory) {
-    catCrit = { categoryId: { equals: category } };
-
-    conditions.push(catCrit);
+    conditions.push({ categoryId: { equals: category } });
   }
 
   if (hasFeatured) {
@@ -25,7 +20,7 @@ const buildCriteriaConditions = (featured: Array<string>, category: number) => {
     });
   }
 
-  return hasCriteria ? { AND: conditions } : {};
+  return (hasFeatured || hasCategory) ? { AND: conditions } : {};
 }
 
 export default async function handler(
