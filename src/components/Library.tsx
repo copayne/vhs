@@ -26,10 +26,6 @@ const fetcher = async (url: string): Promise<Video[]> => {
   const response = await fetch(url);
   return response.json();
 };
-  
-interface Library {
-  videos: Array<Video>
-}
 
 interface LibraryEntry {
   video: Video
