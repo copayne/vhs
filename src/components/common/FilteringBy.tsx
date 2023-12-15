@@ -1,8 +1,6 @@
-import { clsx } from 'clsx';
-import { useSelectedVideo } from "~/stores/SelectedVideo";
-import { type Criteria, useVideos } from "~/stores/Videos";
+
+import { useVideos } from "~/stores/Videos";
 import Chip from '@mui/material/Chip';
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import type { Category } from '~/pages';
 
