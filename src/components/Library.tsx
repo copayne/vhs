@@ -17,17 +17,15 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useSelectedVideo } from "~/stores/SelectedVideo";
 import { type Criteria, useVideos } from "~/stores/Videos";
 import ColorStripe from './common/ColorStripe';
+import FilteringBy from './common/FilteringBy';
 import vhsLogo from '../../public/assets/VHS_C_Logo.png';
 import type { Video } from '~/pages';
+import type { Category } from '~/pages';
 
 const fetcher = async (url: string): Promise<Video[]> => {
   const response = await fetch(url);
   return response.json();
 };
-  
-interface Library {
-  videos: Array<Video>
-}
 
 interface LibraryEntry {
   video: Video
@@ -56,7 +54,11 @@ const LibraryEntry = ({ selectVideo, video }: LibraryEntry) => (
   </div>
 );
 
-const Library = () => {
+interface Library {
+  categories: Array<Category>
+}
+
+const Library = ({ categories }: Library) => {
   const [expanded, setExpanded] = useState(false);
   const [showExpand, setShowExpand] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -94,13 +96,18 @@ const Library = () => {
       },
     };
 
-    fetchVideos(newCriteria);
+    setCriteria(newCriteria);
   }
 
   useEffect(() => {
     fetchVideos();
     // eslint-disable-next-line
-  }, []);
+  }, [
+    criteria.category,
+    criteria.featured.length,
+    criteria.orderBy.field,
+    criteria.orderBy.sort,
+  ]);
 
   const selectVideo = (video: Video) => {
     update(video);
@@ -125,6 +132,9 @@ const Library = () => {
         <ColorStripe text="Library" color="pink" />
       </div>
       <div className="m-1 sm:m-0 p-1 w-[98%] sm:w-full flex flex-wrap flex-col">
+        <div className="w-full p-1">
+          <FilteringBy categories={categories} />
+        </div>
         <div className="w-full bg-white rounded-md text-sm drop-shadow-sticker">
           <div className="w-full h-[6px] bg-black" />
           <div className="m-2 mb-1 flex font-semibold border-b-default-black border-dotted border-b-2 text-default-black">
