@@ -14,7 +14,7 @@ import linda from '../../public/assets/headshots/linda.png';
 import carol from '../../public/assets/headshots/carol.png';
 import alex from '../../public/assets/headshots/alex.png';
 import john from '../../public/assets/headshots/john.png';
-import aurora from '../../public/assets/headshots/aurora.png';
+// import aurora from '../../public/assets/headshots/aurora.png';
 import type { StaticImageData } from 'next/image';
 
 export interface HeadshotData {
@@ -83,10 +83,10 @@ export const HEADSHOTS: Array<HeadshotData> = [
     id: 'tim',
     src: tim,
   },
-  {
-    id: 'aurora',
-    src: aurora,
-  },
+  // {
+  //   id: 'aurora',
+  //   src: aurora,
+  // },
   {
     id: 'john',
     src: john,
