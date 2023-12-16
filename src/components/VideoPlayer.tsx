@@ -4,7 +4,7 @@ import { ColorStripeRainbow } from '~/components/common/ColorStripe';
 
 const CLOUDFRONT_ADDRESS = 'https://dx19ntdwg65hl.cloudfront.net';
 
-const buildSrc = (fileName : string) => `${CLOUDFRONT_ADDRESS}/exports/${fileName}.mp4`;
+const buildSrc = (fileName : string) => `${CLOUDFRONT_ADDRESS}/exports/${fileName}`;
 
 const VideoPlayer = () => {
   const selectedVideo  = useSelectedVideo(state => state.selectedVideo);

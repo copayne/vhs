@@ -70,7 +70,7 @@ const FilteringBy = ({ categories }: FilteringBy) => {
               <Chip
                 key={cast}
                 className="mr-1 mb-1"
-                color="success"
+                color="error"
                 label={cast}
                 onDelete={handleRemoveFeatured(cast)}
                 size="small"
