@@ -4,10 +4,10 @@ import { type NextApiRequest, type NextApiResponse } from 'next';
 
 const client = new S3Client({
   region: process.env.S3_REGION,
-  credentials: {
-    accessKeyId: process.env.S3_ACCESS_KEY,
-    secretAccessKey: process.env.S3_SECRET_KEY,
-  },
+  // credentials: {
+  //   accessKeyId: process.env.S3_ACCESS_KEY,
+  //   secretAccessKey: process.env.S3_SECRET_KEY,
+  // },
 });
 
 export default async function handler(
