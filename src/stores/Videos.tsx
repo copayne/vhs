@@ -24,7 +24,9 @@ interface Videos {
   setCriteria: (criteria: Criteria) => void,
   setFeatured: (featured: Array<string>) => void,
   setVideos: (videos: Video[]) => void,
+  setUrls: (urls: Object) => void,
   videos: Array<Video>,
+  urls: Object,
 }
 
 export const useVideos = create<Videos>()(( set ) => ({
@@ -34,5 +36,7 @@ export const useVideos = create<Videos>()(( set ) => ({
     criteria: { ...state.criteria, featured },
   })),
   setVideos: (videos) => set({ videos }),
+  setUrls: (urls) => set({ urls }),
   videos: [],
+  urls: {},
 }));
