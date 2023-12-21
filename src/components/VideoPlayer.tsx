@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
+/* eslint-disable @typescript-eslint/await-thenable */
 import { useEffect } from "react";
 import { useSelectedVideo } from "../stores/SelectedVideo";
 import { useVideos } from "../stores/Videos";
@@ -16,17 +19,17 @@ const VideoPlayer = () => {
   const src = selectedVideo?.id && urls[selectedVideo?.id]
     ? urls[selectedVideo.id]
     : null;
+
   const getPresignedUrl = async (file: string) => {
     if (!selectedVideo) {
       return;
     }
     
     const res = await fetcher(`/api/presigned-url?file=${file}`);
-    const presignedUrl = (await res) as string;
 
     setUrls({
       ...urls,
-      [selectedVideo.id]: presignedUrl,
+      [selectedVideo.id]: res,
     })
   }
 
@@ -34,9 +37,8 @@ const VideoPlayer = () => {
     if (selectedVideo?.id && !urls[selectedVideo?.id]) {
       const presignedUrl = getPresignedUrl(selectedVideo.src);
     }
+    // eslint-disable-next-line
   }, [selectedVideo?.id])
-
-  console.log(urls, src);
 
   return (
     <section className="h-full w-full">

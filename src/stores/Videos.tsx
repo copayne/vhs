@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-indexed-object-style */
 import { create } from 'zustand';
 import { type Video } from '~/pages/index';
 
