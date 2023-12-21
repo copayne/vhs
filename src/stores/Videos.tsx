@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-indexed-object-style */
 import { create } from 'zustand';
 import { type Video } from '~/pages/index';
 
@@ -19,12 +20,18 @@ export interface Criteria {
   },
 }
 
+interface Url {
+  [id: number]: string
+}
+
 interface Videos {
   criteria: Criteria,
   setCriteria: (criteria: Criteria) => void,
   setFeatured: (featured: Array<string>) => void,
   setVideos: (videos: Video[]) => void,
+  setUrls: (urls: Url) => void,
   videos: Array<Video>,
+  urls: Url,
 }
 
 export const useVideos = create<Videos>()(( set ) => ({
@@ -34,5 +41,7 @@ export const useVideos = create<Videos>()(( set ) => ({
     criteria: { ...state.criteria, featured },
   })),
   setVideos: (videos) => set({ videos }),
+  setUrls: (urls: Url) => set({ urls }),
   videos: [],
+  urls: {},
 }));
