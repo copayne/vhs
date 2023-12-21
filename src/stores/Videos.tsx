@@ -19,14 +19,18 @@ export interface Criteria {
   },
 }
 
+interface Url {
+  [id: number]: string
+}
+
 interface Videos {
   criteria: Criteria,
   setCriteria: (criteria: Criteria) => void,
   setFeatured: (featured: Array<string>) => void,
   setVideos: (videos: Video[]) => void,
-  setUrls: (urls: Object) => void,
+  setUrls: (urls: Url) => void,
   videos: Array<Video>,
-  urls: Object,
+  urls: Url,
 }
 
 export const useVideos = create<Videos>()(( set ) => ({
@@ -36,7 +40,7 @@ export const useVideos = create<Videos>()(( set ) => ({
     criteria: { ...state.criteria, featured },
   })),
   setVideos: (videos) => set({ videos }),
-  setUrls: (urls) => set({ urls }),
+  setUrls: (urls: Url) => set({ urls }),
   videos: [],
   urls: {},
 }));
