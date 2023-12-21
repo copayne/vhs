@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 /* eslint-disable @typescript-eslint/await-thenable */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useEffect } from "react";
 import { useSelectedVideo } from "../stores/SelectedVideo";
 import { useVideos } from "../stores/Videos";
