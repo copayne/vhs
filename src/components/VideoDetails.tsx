@@ -48,7 +48,7 @@ const VideoDetails = ({ categories }: VideoDetails) => {
               {
                 selectedVideo?.filmDate
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-                  ? dayjs(selectedVideo?.filmDate).format("MM/DD/YYYY")
+                  ? dayjs(selectedVideo.filmDate).add(12, 'hour' ).format("MM/DD/YYYY")
                   : ''
               }
             </span>
