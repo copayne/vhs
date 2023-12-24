@@ -46,7 +46,10 @@ export default async function handler(
       orderBy: {
         [criteria?.orderBy.field || 'filmDate']: criteria?.orderBy?.sort || 'asc',
       },
-      where: { ...conditions },
+      where: {
+        hidden: false,
+        ...conditions,
+      },
     });
 
     res.status(200).json(videos);

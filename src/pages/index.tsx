@@ -57,7 +57,7 @@ export interface Actor {
   headshot: string,
 };
 
-export default function Home({ categories }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home({ categories, intro }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <style jsx global>{`

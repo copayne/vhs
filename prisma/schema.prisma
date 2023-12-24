@@ -29,6 +29,7 @@ model Video {
     filmDate DateTime?  @db.Date
     category Category @relation(fields: [categoryId], references: [id])
     categoryId Int
+    hidden Boolean @default(false)
 }
 
 model Category {
