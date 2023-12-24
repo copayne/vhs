@@ -40,7 +40,7 @@ const VideoPlayer = () => {
 
   useEffect(() => {
     if (selectedVideo?.id && !urls[selectedVideo?.id]) {
-      getPresignedUrl(selectedVideo.src);
+      const presignedUrl = getPresignedUrl(selectedVideo.src);
     }
     // eslint-disable-next-line
   }, [selectedVideo?.id])
