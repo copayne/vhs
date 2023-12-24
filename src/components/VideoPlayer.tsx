@@ -7,7 +7,6 @@ import { useSelectedVideo } from "../stores/SelectedVideo";
 import { useVideos } from "../stores/Videos";
 import ReactPlayer from "react-player";
 import { ColorStripeRainbow } from '~/components/common/ColorStripe';
-import { type Video } from "~/pages";
 
 const CLOUDFRONT_ADDRESS = 'https://dx19ntdwg65hl.cloudfront.net';
 
