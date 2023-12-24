@@ -46,7 +46,7 @@ const LibraryEntry = ({ selectVideo, video }: LibraryEntry) => (
       <span>
         {video.filmDate
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-          ? dayjs(video.filmDate).format("MM/DD/YYYY")
+          ? dayjs(video.filmDate).add(12, 'hour' ).format("MM/DD/YYYY")
           : ''
         }
       </span>

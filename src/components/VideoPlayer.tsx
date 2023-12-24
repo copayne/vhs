@@ -8,6 +8,10 @@ import { useVideos } from "../stores/Videos";
 import ReactPlayer from "react-player";
 import { ColorStripeRainbow } from '~/components/common/ColorStripe';
 
+const CLOUDFRONT_ADDRESS = 'https://dx19ntdwg65hl.cloudfront.net';
+
+const introSrc = `${CLOUDFRONT_ADDRESS}/intro1.mp4`;
+
 const fetcher = async (url: string): Promise<string> => {
   const response = await fetch(url);
   return response.json();
@@ -19,7 +23,7 @@ const VideoPlayer = () => {
   const setUrls = useVideos(state => state.setUrls);
   const src = selectedVideo?.id && urls[selectedVideo?.id]
     ? urls[selectedVideo.id]
-    : null;
+    : introSrc;
 
   const getPresignedUrl = async (file: string) => {
     if (!selectedVideo) {
@@ -49,9 +53,12 @@ const VideoPlayer = () => {
             <div className="w-0 h-0 lg:h-full lg:w-1/4 bg-gradient-to-r from-default-black to-black" />
             <div className="w-full lg:w-1/2 h-full bg-black">
               <ReactPlayer
+                playing={!selectedVideo}
                 playsinline
                 controls
                 height="100%"
+                loop={!selectedVideo}
+                muted={!selectedVideo}
                 url={src}
                 width="100%"
               />
