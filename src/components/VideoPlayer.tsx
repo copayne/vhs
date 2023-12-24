@@ -10,6 +10,8 @@ import { ColorStripeRainbow } from '~/components/common/ColorStripe';
 
 const CLOUDFRONT_ADDRESS = 'https://dx19ntdwg65hl.cloudfront.net';
 
+const buildSrc = (fileName : string) => `${CLOUDFRONT_ADDRESS}/exports/${fileName}`;
+
 const introSrc = `${CLOUDFRONT_ADDRESS}/intro1.mp4`;
 
 const fetcher = async (url: string): Promise<string> => {
@@ -19,31 +21,31 @@ const fetcher = async (url: string): Promise<string> => {
 
 const VideoPlayer = () => {
   const selectedVideo  = useSelectedVideo(state => state.selectedVideo);
-  const urls = useVideos(state => state.urls);
-  const setUrls = useVideos(state => state.setUrls);
-  const src = selectedVideo?.id && urls[selectedVideo?.id]
-    ? urls[selectedVideo.id]
+  // const urls = useVideos(state => state.urls);
+  // const setUrls = useVideos(state => state.setUrls);
+  const src = selectedVideo?.id
+    ? buildSrc(selectedVideo.src)
     : introSrc;
 
-  const getPresignedUrl = async (file: string) => {
-    if (!selectedVideo) {
-      return;
-    }
+  // const getPresignedUrl = async (file: string) => {
+  //   if (!selectedVideo) {
+  //     return;
+  //   }
     
-    const res = await fetcher(`/api/presigned-url?file=${file}`);
+  //   const res = await fetcher(`/api/presigned-url?file=${file}`);
 
-    setUrls({
-      ...urls,
-      [selectedVideo.id]: res,
-    })
-  }
+  //   setUrls({
+  //     ...urls,
+  //     [selectedVideo.id]: res,
+  //   })
+  // }
 
-  useEffect(() => {
-    if (selectedVideo?.id && !urls[selectedVideo?.id]) {
-      const presignedUrl = getPresignedUrl(selectedVideo.src);
-    }
-    // eslint-disable-next-line
-  }, [selectedVideo?.id])
+  // useEffect(() => {
+  //   if (selectedVideo?.id && !urls[selectedVideo?.id]) {
+  //     const presignedUrl = getPresignedUrl(selectedVideo.src);
+  //   }
+  //   // eslint-disable-next-line
+  // }, [selectedVideo?.id])
 
   return (
     <section className="h-full w-full">
